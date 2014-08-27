@@ -1,8 +1,8 @@
-=== Postmark Approved WordPress Plugin ===
-Contributors: andy7629, alexknowshtml, jptoto
+=== Postmarkapp WordPress Plugin ===
+Contributors: gagan0123
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.2
-Tested up to: 3.9
+Tested up to: 3.9.2
 Stable tag: trunk
 
 If you're still sending email with default SMTP, you're blind to delivery problems! This Postmark Approved WordPress Plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance.
@@ -55,29 +55,7 @@ Most importantly, a great product requires great support and even better educati
 
 This plugin detects HTML by checking the headers sent by other WordPress plugins. If a "text/html" content type isn't set then this plugin won't send the HTML to Postmark to be sent out only the plain text version of the email.
 
-== Screenshots ==
-
-1. Postmark WP Plugin Settings screen.
 
 == Changelog ==
-= v1.6 =
-* Added open tracking support.
-
-= v1.5 = 
-* Fix issue with new WordPress HTTP API Integration.
-
-= v1.4 =
-* New option to force emails to be sent as HTML. Previously just detected Content-Type.
-* Now uses the WordPress HTTP API.
-
-= v1.3 =
-* Resolved error with handing arrays of recipients
-
-= v1.2 =
-* Arrays of recipients are now properly handled
-* HTML emails and Text Emails are now handled by checking the headers of the emails sent, and sends via Postmark appropriately.
-* Optional "Powered by Postmark" footer of sent emails. "Postmark solves your WordPress email problems. Send transactional email confidently using http://postmarkapp.com"
-* Add license to README and PHP file
-
-= v1.0.0 =
-* First Public release.
+= v1.0 =
+* Improved plugin release
