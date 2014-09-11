@@ -187,6 +187,16 @@ if(get_option('postmarkapp_enabled') == 1){
 	if (!function_exists("wp_mail")){
 		function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()) {
 
+			/*
+			 * WordPress is able to parse both text as well as array format
+			 * headers while this function was only able to deal with the text
+			 * format. Thanks to "Stupid Studio"s patch, this will parse array
+			 * as well
+			 */
+			if (is_array($headers)) {
+				$headers = implode("\r\n", $headers);
+			}
+			
 			// Define Headers
 			$postmark_headers = array(
 				'Accept' => 'application/json',
