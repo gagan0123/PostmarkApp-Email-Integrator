@@ -2,7 +2,7 @@
 /*
 Plugin Name: Postmarkapp
 Plugin URI: https://blog.gagan.pro/postmarkapp-wordpress-plugin/
-Description: Overwrites wp_mail to send emails through Postmark.
+Description: Overwrites wp_mail to send emails through Postmark. Had to overwrite original plugin with some fixes that increases its reliability
 Author: Gagan Deep Singh
 Version: 1.0
 Author URI: https://gagan.pro
@@ -89,7 +89,7 @@ function pma_admin_options() {
 			var $this = $(this);
 			var send_to = $('#pma_test_address').val();
 
-			$("#test-form .button-primary").val("Sendingâ€¦");
+			$("#test-form .button-primary").val("Sending...");
 			$.post(ajaxurl, {email: send_to, action:$this.attr("action")}, function(data){
 				$("#test-form .button-primary").val(data);
 			});
@@ -282,13 +282,58 @@ function pma_send_mail($headers, $email){
 		'headers' => $headers,
 		'body' => json_encode($email)
 	);
-	$response = wp_remote_post(POSTMARKAPP_ENDPOINT, $args);
+	do_action('before_wp_mail');
+	
+	$response = wp_remote_post(POSTMARKAPP_ENDPOINT, apply_filters('pma_mail_args',$args));
 
-	if($response['response']['code'] == 200) {
-		return true;
-	} else {
+	do_action('after_wp_mail');
+	
+	if(is_wp_error($response)){
 		return false;
 	}
+	else if(isset($response['response']['code'])){
+		if($response['response']['code'] == 200) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
+	
+	
 }
+
+/*
+ * Changes the default http request timeout of wordpress from 5 seconds to 60
+ * seconds so that the request the postmark api can be successfully executed.
+ */
+function pma_filter_http_request_timeout($current_timeout) {
+	if (intval($current_timeout) < 60){
+		return intval(60);
+	}
+	else{
+		return intval($current_timeout);
+	}
+}
+
+/*
+ * Adds timeout filter so that mail function can get enough time to contact the
+ * postmark api servers
+ */
+function pma_add_timeout_filter(){
+	add_filter( 'http_request_timeout', 'pma_filter_http_request_timeout');
+}
+add_action('before_wp_mail','pma_add_timeout_filter');
+
+/*
+ * Removes the timeout filter after the mail function has been successfully 
+ * executed
+ */
+function pma_remove_timeout_filter(){
+	remove_filter( 'http_request_timeout', 'pma_filter_http_request_timeout');
+}
+add_action('after_wp_mail','pma_remove_timeout_filter');
 
 ?>
