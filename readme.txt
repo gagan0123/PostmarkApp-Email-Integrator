@@ -1,8 +1,8 @@
-=== Postmarkapp WordPress Plugin ===
+=== Postmarkapp ===
 Contributors: gagan0123
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
-Requires at least: 3.2
-Tested up to: 3.9.2
+Requires at least: 3.5
+Tested up to: 4.0
 Stable tag: trunk
 
 If you're still sending email with default SMTP, you're blind to delivery problems! This Postmark Approved WordPress Plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance.
@@ -11,7 +11,7 @@ If you're still sending email with default SMTP, you're blind to delivery proble
 
 If you're still sending email with default SMTP, you're blind to delivery problems! This Postmark Approved WordPress Plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance. No more SMTP errors or delivery problems with Postmark!
 
-If you don't already have a free Postmark account, you can get one in minutes. Every account comes with 10,000 free sends.
+If you don't already have a free Postmark account, you can get one in minutes. Every account comes with thousands of free email sends.
 
 == Installation ==
 
@@ -58,4 +58,6 @@ This plugin detects HTML by checking the headers sent by other WordPress plugins
 
 == Changelog ==
 = v1.0 =
-* Improved plugin release
+* Fixed the Connection Timeout bug
+* Fixed the Fatal Error due to incorrect usage of WP_Error object
+* Fixed the issue while parsing the headers sent as array to the wp_mail function
