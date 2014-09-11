@@ -16,6 +16,8 @@ If you're still sending email with default SMTP, you're blind to delivery proble
 
 If you don't already have a free Postmark account, you can get one in minutes. Every account comes with thousands of free email sends.
 
+NOTE: This plugin is a copy of the other Postmarkapp plugin which was having several bugs but developers were not fixing them from a long time so had to create a new plugin to address those issues.
+
 == Installation ==
 
 1. Upload postmark directory to your /wp-content/plugins directory
