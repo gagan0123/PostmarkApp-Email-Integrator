@@ -1,4 +1,4 @@
-=== Postmarkapp ===
+=== PostmarkApp WP Plugin ===
 Contributors: gagan0123
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.5
