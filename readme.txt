@@ -3,9 +3,12 @@ Contributors: gagan0123
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: trunk
+Donate link: https://gagan.pro/donate/?plugin=Postmarkapp
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-If you're still sending email with default SMTP, you're blind to delivery problems! This Postmark Approved WordPress Plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance.
+Enables your WordPress site to send emails via PostMarkApp api.
 
 == Description ==
 
@@ -33,7 +36,7 @@ The Postmark Approved WordPress plugin overrides any usage of the wp_mail() func
 
 = Does this cost me money? =
 
-This Postmark plugin is 100% free. All new Postmark accounts include 1000 free email sends. Beyond your first 1000 email sends, they will cost only $1.50 per 1000 sends with no monthly commitments and no expirations.
+This Postmark plugin is 100% free. All new Postmark accounts include thousands of free email sends. Beyond your first free email sends, they will cost only $1.50 per 1000 sends with no monthly commitments and no expirations.
 
 We will send you multiple warnings as you approach running out of send credits, so you don't need to worry about paying for credits until you absolutely need them.
 
@@ -45,11 +48,11 @@ No worries, our expert team can help. Just send an email to support@postmarkapp.
 
 = Why should I trust you with my email sending? =
 
-Because we've been in this business for many years. Weâ€™ve been running an email marketing service, Newsberry, for five years. Through trial and error we already know what it takes to manage a large volume of email. We handle things like whitelisting, ISP throttling, reverse DNS, feedback loops, content scanning, and delivery monitoring to ensure your emails get to the inbox.
+Because we've been in this business for many years. We've been running an email marketing service, Newsberry, for five years. Through trial and error we already know what it takes to manage a large volume of email. We handle things like whitelisting, ISP throttling, reverse DNS, feedback loops, content scanning, and delivery monitoring to ensure your emails get to the inbox.
 
-We're hosted at Rackspace, where weâ€™re able to offer both the physical (SAS70 data center) and environment security through a completely dedicated cluster of servers. Our servers utilize virtualization and high availability failover protection to properly handle outages and keep your data safe.
+We're hosted at Rackspace, where we're able to offer both the physical (SAS70 data center) and environment security through a completely dedicated cluster of servers. Our servers utilize virtualization and high availability failover protection to properly handle outages and keep your data safe.
 
-Most importantly, a great product requires great support and even better education. Our team is spread out across six time zones to offer fast support on everything from using Postmark to best practices on content and user engagement. A solid infrastructure only goes so far, thatâ€™s why improving our customerâ€™s sending practices helps achieve incredible results
+Most importantly, a great product requires great support and even better education. Our team is spread out across six time zones to offer fast support on everything from using Postmark to best practices on content and user engagement. A solid infrastructure only goes so far, that's why improving our customer's sending practices helps achieve incredible results
 
 = Why aren't my HTML emails being sent? =
 
