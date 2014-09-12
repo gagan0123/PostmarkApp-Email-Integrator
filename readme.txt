@@ -19,6 +19,7 @@ If you don't already have a free Postmark account, you can get one in minutes. E
 NOTE: This is not official PostMarkApp Plugin. This plugin is a copy of the Official Postmarkapp plugin which was having several bugs but developers were not fixing them from a long time so had to create a new plugin to address those issues.
 
 Issues fixed:
+
  * Fixed the Connection Timeout bug
  * Fixed the Fatal Error due to incorrect usage of WP_Error object
  * Fixed the issue while parsing the headers sent as array to the wp_mail function
