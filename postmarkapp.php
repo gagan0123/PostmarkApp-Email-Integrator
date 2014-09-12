@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Postmarkapp WP Plugin
+Plugin Name: Postmarkapp Email Integrator
 Plugin URI: https://blog.gagan.pro/postmarkapp-wordpress-plugin/
 Description: Overwrites wp_mail to send emails through Postmark. Had to overwrite original plugin with some fixes that increases its reliability
 Author: Gagan Deep Singh
