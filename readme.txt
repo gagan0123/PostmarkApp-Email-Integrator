@@ -61,10 +61,14 @@ This plugin detects HTML by checking the headers sent by other WordPress plugins
 
 == Changelog ==
 
-= v1.2 =
+= v2.0 =
 
 * Error handling done through WP_Error object
 * Made the "Test Email" error messages more descriptive by showing actual PostMarkApp messages
+* Added support for Bcc header
+* Added support for Cc header
+* Added support for Reply-To header
+* Removed "Powered by PostMark" append in the emails
 
 = v1.1 =
 
