@@ -138,8 +138,8 @@ function pma_admin_options() {
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Postmarkapp Settings</h2>
     <h3>What is Postmark?</h3>
-		<p>This Postmark Approved plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance. </p>
-		<p>If you don't already have a free Postmark account, <a href="https://postmarkapp.com/sign_up">you can get one in minutes</a>. Every account comes with 10,000 free sends.</p>
+		<p>This plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance. </p>
+		<p>If you don't already have a free Postmark account, <a href="https://postmarkapp.com/sign_up">you can get one in minutes</a>. Every account comes with thousands of free sends.</p>
 
 		<br />
 
