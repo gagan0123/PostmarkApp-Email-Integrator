@@ -234,8 +234,8 @@ if(get_option('postmarkapp_enabled') == 1){
 			);
 
 			// Send Email
-			if(!is_array($to)){
-				$recipients = explode(",", $to);
+			if(is_array($to)){
+				$recipients = implode(",", $to);
 			} else {
 				$recipients = $to;
 			}
@@ -277,6 +277,7 @@ if(get_option('postmarkapp_enabled') == 1){
 			if(is_wp_error($response)){
 				return false;
 			}
+			return true;
 		}
 	}
 }
@@ -291,13 +292,18 @@ function pma_convert_plaintext_to_html($message){
  */
 function pma_parse_headers($headers){
 	if(!is_array($headers)){
-		$headers = explode("\r\n", $headers);
+		if(stripos($headers, "\r\n")!==false){
+			$headers = explode("\r\n", $headers);
+		}
+		else{
+			$headers = explode("\n", $headers);
+		}
 	}
 	$recognized_headers = array();
 	$headers_list = array(
 		'Content-Type',
-		'Cc',
 		'Bcc',
+		'Cc',
 		'Reply-To'
 	);
 	if(!empty($headers)){
@@ -307,9 +313,10 @@ function pma_parse_headers($headers){
 			//send headers as simple text array
 			$header = explode(':', $header);
 			foreach($headers_list as $header_name){
-				if(stripos($header, $header_name)){
+				if(stripos($header[0], $header_name)!==false){
 					$recognized_headers[$header_name] = trim($header[1]);
 					unset($headers[$key]);
+					break;
 				}
 			}
 		}
