@@ -22,8 +22,7 @@ function pma_import_settings(){
 		'postmarkapp_api_key' => 'postmark_api_key',
 		'postmarkapp_sender_address' => 'postmark_sender_address',
 		'postmarkapp_force_html' => 'postmark_force_html',
-		'postmarkapp_trackopens' => 'postmark_trackopens',
-		'postmarkapp_poweredby' => 'postmark_poweredby'
+		'postmarkapp_trackopens' => 'postmark_trackopens'
 		);
 	foreach($options as $here => $there){
 		update_option($here, get_option($there));
@@ -98,7 +97,6 @@ function pma_admin_options() {
 		update_option('postmarkapp_api_key', $api_key);
 		update_option('postmarkapp_sender_address', $sender_email);
 		update_option('postmarkapp_force_html', $pma_forcehtml);
-		update_option('postmarkapp_poweredby', $pma_poweredby);
 		update_option('postmarkapp_trackopens', $pma_trackopens);
 
 		$msg_updated = "Postmarkapp settings have been saved.";
@@ -166,10 +164,6 @@ function pma_admin_options() {
 				<tr>
 					<th><label for="pma_trackopens">Track Opens</label></th>
 					<td><input name="pma_trackopens" id="" type="checkbox" value="1"<?php if(get_option('postmarkapp_trackopens') == 1): echo ' checked="checked"'; endif; ?>/> <span style="font-size:11px;">Use Postmark's Open Tracking feature to capture open events. (Forces Html option to be turned on)</span></td>
-				</tr>
-				<tr>
-					<th><label for="pma_poweredby">Support Postmark</label></th>
-					<td><input name="pma_poweredby" id="" type="checkbox" value="1"<?php if(get_option('postmarkapp_poweredby') == 1): echo ' checked="checked"'; endif; ?>/> <span style="font-size:11px;">Adds a credit to Postmark at the bottom of emails.</span></td>
 				</tr>
 			</tbody>
 			</table>
@@ -239,15 +233,6 @@ if(get_option('postmarkapp_enabled') == 1){
 				'Content-Type' => 'application/json',
 		        'X-Postmark-Server-Token' => get_option('postmarkapp_api_key')
 			);
-
-			//@todo remove this section, not worth spending time on
-			// If "Support Postmark" is on
-			if(get_option('postmarkapp_poweredby') == 1){
-				// Check Content Type
-				if(!strpos($headers, "text/html")){
-					$message .= "\n\nPostmark solves your WordPress email problems. Send transactional email confidently using http://postmarkapp.com";
-				}
-			}
 
 			// Send Email
 			if(!is_array($to)){
@@ -345,11 +330,6 @@ function pma_send_test(){
 
 	$message = 'This is a test email sent via Postmark from '.get_bloginfo('name').'.';
 	$html_message = 'This is a test email sent via <strong>Postmark</strong> from '.get_bloginfo('name').'.';
-
-	if(get_option('postmarkapp_poweredby') == 1){
-		$message .= "\n\nPostmark solves your WordPress email problems. Send transactional email confidently using http://postmarkapp.com";
-		$html_message .= '<br /><br />Postmark solves your WordPress email problems. Send transactional email confidently using <a href="http://postmarkapp.com">Postmark</a>.';
-	}
 	
 	$email = array();
 	$email['To'] = $email_address;
