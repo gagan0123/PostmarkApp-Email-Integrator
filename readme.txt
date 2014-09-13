@@ -61,6 +61,11 @@ This plugin detects HTML by checking the headers sent by other WordPress plugins
 
 == Changelog ==
 
+= v1.2 =
+
+* Error handling done through WP_Error object
+* Made the "Test Email" error messages more descriptive by showing actual PostMarkApp messages
+
 = v1.1 =
 
 * Added functionality to import the settings of official "Postmark Approved Wordpress Plugin"
