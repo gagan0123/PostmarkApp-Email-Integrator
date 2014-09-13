@@ -31,10 +31,10 @@ To get help about PostMarkApp, please visit this link: http://support.postmarkap
 == Installation ==
 
 1. Upload postmark directory to your /wp-content/plugins directory
-2. Activate plugin in WordPress admin
-3. In WordPress admin, go to Settings then Postmarkapp. You will then want to insert your Postmark details. If you don't already have a Postmark account, get one at http://postmarkapp.com
-4. Verify sending by entering a recipient email address you have access to and pressing the "Send Test Email" button.
-5. Once verified, then check "Enable" to override wp_mail and send using Postmark instead.
+1. Activate plugin in WordPress admin
+1. In WordPress admin, go to Settings then Postmarkapp. You will then want to insert your Postmark details. If you don't already have a Postmark account, get one at http://postmarkapp.com
+1. Verify sending by entering a recipient email address you have access to and pressing the "Send Test Email" button.
+1. Once verified, then check "Enable" to override wp_mail and send using Postmark instead.
 
 == Frequently Asked Questions ==
 
