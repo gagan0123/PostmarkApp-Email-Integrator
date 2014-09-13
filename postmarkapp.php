@@ -209,12 +209,13 @@ function pma_admin_test_ajax() {
 // End Admin Functionality
 
 
-
-
 // Override wp_mail() if postmark enabled
 if(get_option('postmarkapp_enabled') == 1){
 	if (!function_exists("wp_mail")){
 		function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()) {
+			
+			// Compact the input, apply the filters, and extract them back out
+			extract( apply_filters( 'wp_mail', compact( 'to', 'subject', 'message', 'headers', 'attachments' ) ) );
 			
 			$recognized_headers = pma_parse_headers($headers);
 			
