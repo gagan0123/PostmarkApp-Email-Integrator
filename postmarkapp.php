@@ -14,6 +14,30 @@ define('POSTMARKAPP_ENDPOINT', 'http://api.postmarkapp.com/email');
 // Admin Functionality
 add_action('admin_menu', 'pma_admin_menu'); // Add Postmark to Settings
 
+/*
+ * Imports the settings of the official postmark plugin to this plugin.
+ ***/
+function pma_import_settings(){
+	$options = array(
+		'postmarkapp_api_key' => 'postmark_api_key',
+		'postmarkapp_sender_address' => 'postmark_sender_address',
+		'postmarkapp_force_html' => 'postmark_force_html',
+		'postmarkapp_trackopens' => 'postmark_trackopens',
+		'postmarkapp_poweredby' => 'postmark_poweredby'
+		);
+	foreach($options as $here => $there){
+		update_option($here, get_option($there));
+	}
+}
+
+function pma_plugin_activate(){
+	if(get_option('postmarkapp_api_key')===false){
+		pma_import_settings();
+	}
+	
+}
+register_activation_hook( __FILE__, 'pma_plugin_activate' );
+
 function pma_admin_menu() {
 	add_options_page('Postmarkapp', 'Postmarkapp', 'manage_options', 'pma_admin', 'pma_admin_options');
 }
@@ -94,6 +118,14 @@ function pma_admin_options() {
 				$("#test-form .button-primary").val(data);
 			});
 		});
+		$('#pma_import_button').click(function(){
+			$.post(ajaxurl, {action:'pma_import_settings'}, function(data){
+				$("#test-form .button-secondary").val(data);
+				if(data == 'Settings Imported'){
+					location.reload();
+				}
+			});
+		});
 
 	});
 	</script>
@@ -160,6 +192,9 @@ function pma_admin_options() {
 			</table>
 			<div class="submit">
 				<input type="submit" name="submit" value="Send Test Email" class="button-primary" />
+			</div>
+			<div class="submit">
+				<input id="pma_import_button" type="button" value="Import Settings" class="button-secondary" />
 			</div>
 		</form>
 
@@ -346,4 +381,10 @@ function pma_remove_timeout_filter(){
 }
 add_action('after_wp_mail','pma_remove_timeout_filter');
 
+function pma_admin_import_settings(){
+	pma_import_settings();
+	echo "Settings Imported";
+	die();
+}
+add_action('wp_ajax_pma_import_settings', 'pma_admin_import_settings');
 ?>
