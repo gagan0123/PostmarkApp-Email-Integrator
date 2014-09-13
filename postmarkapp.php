@@ -283,7 +283,7 @@ if(get_option('postmarkapp_enabled') == 1){
 }
 
 function pma_convert_plaintext_to_html($message){
-	//@todo implement this function
+	$message = nl2br( htmlspecialchars( $message ));
 	return $message;
 }
 

@@ -23,6 +23,7 @@ Issues fixed:
  * Fixed the Connection Timeout bug
  * Fixed the Fatal Error due to incorrect usage of WP_Error object
  * Fixed the issue while parsing the headers sent as array to the wp_mail function
+ * Fixed the breaking of plaintext when force html option is selected
 
 To know more about PostMarkApp, please visit this link: http://postmarkapp.com
 
@@ -60,6 +61,10 @@ This plugin detects HTML by checking the headers sent by other WordPress plugins
 
 
 == Changelog ==
+
+= v2.1 =
+
+* Fixed the breaking of plaintext when force html option is selected
 
 = v2.0 =
 
