@@ -221,16 +221,17 @@ function pma_admin_test_ajax() {
 if(get_option('postmarkapp_enabled') == 1){
 	if (!function_exists("wp_mail")){
 		function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()) {
-
-			/*
-			 * WordPress is able to parse both text as well as array format
-			 * headers while this function was only able to deal with the text
-			 * format. Thanks to "Stupid Studio"s patch, this will parse array
-			 * as well
-			 */
-			if (is_array($headers)) {
-				$headers = implode("\r\n", $headers);
+			
+			$recognized_headers = pma_parse_headers($headers);
+			
+			if(isset($recognized_headers['Content-Type']) && stripos($recognized_headers['Content-Type'],'text/html')!==false){
+				$current_email_type = 'HTML';
 			}
+			else{
+				$current_email_type = 'PLAINTEXT';
+			}
+			
+			return true;
 			
 			// Define Headers
 			$postmark_headers = array(
@@ -239,6 +240,7 @@ if(get_option('postmarkapp_enabled') == 1){
 		        'X-Postmark-Server-Token' => get_option('postmarkapp_api_key')
 			);
 
+			//@todo remove this section, not worth spending time on
 			// If "Support Postmark" is on
 			if(get_option('postmarkapp_poweredby') == 1){
 				// Check Content Type
@@ -254,24 +256,40 @@ if(get_option('postmarkapp_enabled') == 1){
 				$recipients = $to;
 			}
 
-			foreach($recipients as $recipient){
-				// Construct Message
-				$email = array();
-				$email['To'] = $recipient;
-				$email['From'] = get_option('postmarkapp_sender_address');
-		    	$email['Subject'] = $subject;
-		    	$email['TextBody'] = $message;
-
-		    	if(strpos($headers, "text/html" ) || get_option('postmarkapp_force_html') == 1){
-			    	$email['HtmlBody'] = $message;
-		    	}
-
-		    	if(get_option('postmarkapp_trackopens') == 1){
-		    		$email['TrackOpens'] = "true";
-		    	}
-
-        		$response = pma_send_mail($postmark_headers, $email);
+			//@todo need to add a count for receipients(including Cc and Bcc so that they may not go beyond 20
+			
+			// Construct Message
+			$email = array();
+			$email['To'] = $recipients;
+			$email['From'] = get_option('postmarkapp_sender_address');
+			$email['Subject'] = $subject;
+			$email['TextBody'] = $message;
+			
+			if(isset($recognized_headers['Cc']) && !empty($recognized_headers['Cc'])){
+				$email['Cc'] = $recognized_headers['Cc'];
 			}
+			
+			if(isset($recognized_headers['Bcc']) && !empty($recognized_headers['Bcc'])){
+				$email['Bcc'] = $recognized_headers['Bcc'];
+			}
+			
+			if(isset($recognized_headers['Reply-To']) && !empty($recognized_headers['Reply-To'])){
+				$email['ReplyTo'] = $recognized_headers['Reply-To'];
+			}
+
+			if($current_email_type == 'HTML'){
+				$email['HtmlBody'] = $message;
+			}
+			else if(get_option('postmarkapp_force_html') == 1 || get_option('postmarkapp_trackopens') == 1){
+				$email['HtmlBody'] = pma_convert_plaintext_to_html($message);
+			}
+
+			if(get_option('postmarkapp_trackopens') == 1){
+				$email['TrackOpens'] = "true";
+			}
+
+			$response = pma_send_mail($postmark_headers, $email);
+			
 			if(is_wp_error($response)){
 				return false;
 			}
@@ -279,6 +297,41 @@ if(get_option('postmarkapp_enabled') == 1){
 	}
 }
 
+function pma_convert_plaintext_to_html($message){
+	//@todo implement this function
+	return $message;
+}
+
+/*
+ * Parses the $headers string or array and create a recognizable headers array
+ */
+function pma_parse_headers($headers){
+	if(!is_array($headers)){
+		$headers = explode("\r\n", $headers);
+	}
+	$recognized_headers = array();
+	$headers_list = array(
+		'Content-Type',
+		'Cc',
+		'Bcc',
+		'Reply-To'
+	);
+	if(!empty($headers)){
+		foreach($headers as $key=>$header){
+			//@todo there are three kind of people, one who send headers as 
+			//string, second who send headers as associative array, third who 
+			//send headers as simple text array
+			$header = explode(':', $header);
+			foreach($headers_list as $header_name){
+				if(stripos($header, $header_name)){
+					$recognized_headers[$header_name] = trim($header[1]);
+					unset($headers[$key]);
+				}
+			}
+		}
+	}
+	return $recognized_headers;
+}
 
 function pma_send_test(){
 	$email_address = $_POST['email'];
