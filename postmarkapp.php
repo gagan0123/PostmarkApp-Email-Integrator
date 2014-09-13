@@ -225,8 +225,6 @@ if(get_option('postmarkapp_enabled') == 1){
 				$current_email_type = 'PLAINTEXT';
 			}
 			
-			return true;
-			
 			// Define Headers
 			$postmark_headers = array(
 				'Accept' => 'application/json',
