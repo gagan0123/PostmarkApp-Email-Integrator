@@ -272,7 +272,9 @@ if(get_option('postmarkapp_enabled') == 1){
 
         		$response = pma_send_mail($postmark_headers, $email);
 			}
-			return $response;
+			if(is_wp_error($response)){
+				return false;
+			}
 		}
 	}
 }
@@ -311,9 +313,9 @@ function pma_send_test(){
 	}
 
     $response = pma_send_mail($postmark_headers, $email);
-
-    if ($response === false){
-    	return "Test Failed with Error ".curl_error($curl);
+	
+	if (is_wp_error($response)){
+    	return 'Test Failed with Error "'.$response->get_error_message().'"';
     } else {
     	return "Test Sent";
    	}
@@ -334,18 +336,36 @@ function pma_send_mail($headers, $email){
 	do_action('after_wp_mail');
 	
 	if(is_wp_error($response)){
-		return false;
+		return new WP_Error('CONNECTION_TIMEOUT','Connection Timeout');
 	}
 	else if(isset($response['response']['code'])){
 		if($response['response']['code'] == 200) {
 			return true;
 		} else {
-			return false;
+			$failure_message = '';
+			if(isset($response['body'])){
+				$error = json_decode($response['body'],true);
+				if(isset($error['ErrorCode'])){
+					$error_code = $error['ErrorCode'];
+				}
+				else{
+					$error_code = '000';
+				}
+				if(isset($error['Message'])){
+					$error_message = $error['Message'];
+				}
+				else{
+					$error_message = 'Unknown Error';
+				}
+				return new WP_Error($error_code,$error_message);
+			}
+			
 		}
 	}
 	else{
-		return false;
+		return new WP_Error('NO_RESPONSE','No Response from the PostMark Server');
 	}
+	wp_mail();
 	
 	
 }
