@@ -4,7 +4,7 @@ Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.5
 Tested up to: 4.0
 Donate link: https://gagan.pro/donate/?plugin=Postmarkapp
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,7 +60,13 @@ This plugin detects HTML by checking the headers sent by other WordPress plugins
 
 
 == Changelog ==
+
+= v1.1 =
+
+* Added functionality to import the settings of official "Postmark Approved Wordpress Plugin"
+
 = v1.0 =
+
 * Fixed the Connection Timeout bug
 * Fixed the Fatal Error due to incorrect usage of WP_Error object
 * Fixed the issue while parsing the headers sent as array to the wp_mail function
