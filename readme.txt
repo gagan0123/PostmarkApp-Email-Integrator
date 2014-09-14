@@ -16,7 +16,7 @@ This plugin enables WordPress blogs of any size to deliver and track WordPress n
 
 If you don't already have a free Postmark account, you can get one in minutes. Every account comes with thousands of free email sends.
 
-NOTE: This is not official PostMarkApp Plugin. This plugin is a copy of the Official Postmarkapp plugin which was having several bugs but developers were not fixing them from a long time so had to create a new plugin to address those issues.
+PLEASE NOTE: This is not official PostMarkApp Plugin. This plugin is a copy of the Official Postmarkapp plugin which had several critical bugs.  The Official Plugin developers have not addressed these bugs for some time now, so I created a new plugin to solve those issues.
 
 Issues fixed:
 
