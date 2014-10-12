@@ -1,5 +1,5 @@
 === PostmarkApp Email Integrator ===
-Contributors: gagan0123
+Contributors: gagan0123, guillaumemolter
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.5
 Tested up to: 4.0
@@ -24,6 +24,18 @@ Issues fixed:
  * Fixed the Fatal Error due to incorrect usage of WP_Error object
  * Fixed the issue while parsing the headers sent as array to the wp_mail function
  * Fixed the breaking of plaintext when force html option is selected
+
+New Features added:
+
+ * Support for adding Cc, Bcc, and Reply-To headers
+ * Support to filter the arguments by other plugins like its done in the actual wp_mail() function of WordPress
+ * Auto import settings from the Postmarkapp approved WordPress plugin for easy migration
+
+Roadmap:
+
+ * Support for attachments
+ * Handling special characters in Subject
+ * Ability for dynamic "From" addresses by verifying from PostmarkApp
 
 To know more about PostMarkApp, please visit this link: http://postmarkapp.com
 
