@@ -1,16 +1,12 @@
-=== PostmarkApp Email Integrator ===
-Contributors: gagan0123, guillaumemolter
-Tags: postmark, email, smtp, notifications, wp_mail, wildbit
-Requires at least: 3.5
-Tested up to: 4.0
-Donate link: https://gagan.pro/donate/?plugin=Postmarkapp
-Stable tag: 2.2
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# PostmarkApp Email Integrator #
+
+* **Contributors:** [gagan0123] (http://profiles.wordpress.org/gagan0123), [guillaumemolter] (http://profiles.wordpress.org/guillaumemolter),
+
+* **License:** [GPL v2 or later] ( http://www.gnu.org/licenses/gpl-2.0.html)
 
 Enables your WordPress site to send emails via PostMarkApp API.
 
-== Description ==
+## Description ##
 
 This plugin enables WordPress blogs of any size to deliver and track WordPress notification emails reliably, with minimal setup time and zero maintenance. No more SMTP errors or delivery problems with Postmark!
 
@@ -41,7 +37,7 @@ To know more about PostMarkApp, please visit this link: http://postmarkapp.com
 
 To get help about PostMarkApp, please visit this link: http://support.postmarkapp.com/
 
-== Installation ==
+## Installation ##
 
 1. Upload postmark directory to your /wp-content/plugins directory
 1. Activate plugin in WordPress admin
@@ -49,17 +45,17 @@ To get help about PostMarkApp, please visit this link: http://support.postmarkap
 1. Verify sending by entering a recipient email address you have access to and pressing the "Send Test Email" button.
 1. Once verified, then check "Enable" to override wp_mail and send using Postmark instead.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
-= What is Postmark? =
+#### What is Postmark? ####
 
 Postmark is a hosted service that expertly handles all delivery of transactional webapp and web site email. This includes welcome emails, password resets, comment notifications, and more. If you've ever installed WordPress and had issues with PHP's mail() function not working right, or your WordPress install sends comment notifications or password resets to spam, Postmark makes all of these problems vanish in seconds. Without Postmark, you may not even know you're having delivery problems. Find out in seconds by installing and configuring this plugin.
 
-= Will this plugin work with my WordPress site? =
+#### Will this plugin work with my WordPress site? ####
 
 This plugin overrides any usage of the wp_mail() function. Because of this, if any 3rd party code or plugins send mail directly using the PHP mail function, or any other method, we cannot override it. Please contact the makers of any offending plugins and let them know that they should use wp_mail() instead of unsupported mailing functions.
 
-= Does this cost me money? =
+#### Does this cost me money? ####
 
 This Postmark plugin is 100% free. All new Postmark accounts include thousands of free email sends. Beyond your first free email sends, they will cost only $1.50 per 1000 sends with no monthly commitments and no expirations.
 
@@ -68,17 +64,17 @@ Postmark will send you multiple warnings as you approach running out of send cre
 Sign up for your free Postmark account at http://postmarkapp.com and get started now.
 
 
-== Changelog ==
+## Changelog ##
 
-= v2.2 =
+#### v2.2 ####
 
 * Added better $var validation using isset to prevent 'Notice: Undefined' when WP_debug is activated.
 
-= v2.1 =
+#### v2.1 ####
 
 * Fixed the breaking of plaintext when force html option is selected
 
-= v2.0 =
+#### v2.0 ####
 
 * Error handling done through WP_Error object
 * Made the "Test Email" error messages more descriptive by showing actual PostMarkApp messages
@@ -87,11 +83,11 @@ Sign up for your free Postmark account at http://postmarkapp.com and get started
 * Added support for Reply-To header
 * Removed "Powered by PostMark" append in the emails
 
-= v1.1 =
+#### v1.1 ####
 
 * Added functionality to import the settings of official "Postmark Approved Wordpress Plugin"
 
-= v1.0 =
+#### v1.0 ####
 
 * Fixed the Connection Timeout bug
 * Fixed the Fatal Error due to incorrect usage of WP_Error object
