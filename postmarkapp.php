@@ -57,41 +57,35 @@ add_filter('plugin_action_links', 'pma_admin_action_links', 10, 2);
 
 
 function pma_admin_options() {
-	if($_POST['submit']) {
-		$pma_enabled = $_POST['pma_enabled'];
-		if($pma_enabled):
+	if(isset($_POST['submit']) && $_POST['submit']=="Save") {
+		
+		if(isset($_POST['pma_enabled']) && $_POST['pma_enabled']){
 			$pma_enabled = 1;
-		else:
+		} else{
 			$pma_enabled = 0;
-		endif;
+		}
 
 		$api_key = $_POST['pma_api_key'];
 		$sender_email = $_POST['pma_sender_address'];
-
-		$pma_forcehtml = $_POST['pma_forcehtml'];
-		if($pma_forcehtml):
+		
+		if(isset($_POST['pma_forcehtml']) && $_POST['pma_forcehtml']){
 			$pma_forcehtml = 1;
-		else:
+		} else{
 			$pma_forcehtml = 0;
-		endif;
-
-		$pma_poweredby = $_POST['pma_poweredby'];
-		if($pma_poweredby):
+		}
+		
+		if(isset($_POST['pma_poweredby']) && $_POST['pma_poweredby']){
 			$pma_poweredby = 1;
-		else:
+		} else{
 			$pma_poweredby = 0;
-		endif;
-
-		$pma_trackopens = $_POST['pma_trackopens'];
-		if($pma_trackopens){
+		}
+		
+		if(isset($_POST['pma_trackopens']) && $_POST['pma_trackopens']){
 			$pma_trackopens = 1;
 			$pma_forcehtml = 1;
-		}
-		else
-		{
+		} else{
 			$pma_trackopens = 0;
 		}
-
 
 		update_option('postmarkapp_enabled', $pma_enabled);
 		update_option('postmarkapp_api_key', $api_key);
@@ -130,8 +124,8 @@ function pma_admin_options() {
 
 	<div class="wrap">
 
-		<?php if($msg_updated): ?><div class="updated"><p><?php echo $msg_updated; ?></p></div><?php endif; ?>
-		<?php if($msg_error): ?><div class="error"><p><?php echo $msg_error; ?></p></div><?php endif; ?>
+		<?php if(isset($msg_updated)): ?><div class="updated"><p><?php echo $msg_updated; ?></p></div><?php endif; ?>
+		<?php if(isset($msg_error)): ?><div class="error"><p><?php echo $msg_error; ?></p></div><?php endif; ?>
 
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Postmarkapp Settings</h2>
