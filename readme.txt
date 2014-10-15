@@ -57,7 +57,7 @@ Postmark is a hosted service that expertly handles all delivery of transactional
 
 = Will this plugin work with my WordPress site? =
 
-The Postmark Approved WordPress plugin overrides any usage of the wp_mail() function. Because of this, if any 3rd party code or plugins send mail directly using the PHP mail function, or any other method, we cannot override it. Please contact the makers of any offending plugins and let them know that they should use wp_mail() instead of unsupported mailing functions.
+This plugin overrides any usage of the wp_mail() function. Because of this, if any 3rd party code or plugins send mail directly using the PHP mail function, or any other method, we cannot override it. Please contact the makers of any offending plugins and let them know that they should use wp_mail() instead of unsupported mailing functions.
 
 = Does this cost me money? =
 
@@ -67,12 +67,12 @@ Postmark will send you multiple warnings as you approach running out of send cre
 
 Sign up for your free Postmark account at http://postmarkapp.com and get started now.
 
-= Why aren't my HTML emails being sent? =
-
-This plugin detects HTML by checking the headers sent by other WordPress plugins. If a "text/html" content type isn't set then this plugin won't send the HTML to Postmark to be sent out only the plain text version of the email.
-
 
 == Changelog ==
+
+= v2.2 =
+
+* Added better $var validation using isset to prevent 'Notice: Undefined' when WP_debug is activated.
 
 = v2.1 =
 

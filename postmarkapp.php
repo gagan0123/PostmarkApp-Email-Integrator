@@ -434,6 +434,9 @@ function pma_remove_timeout_filter(){
 }
 add_action('after_wp_mail','pma_remove_timeout_filter');
 
+/**
+ * Imports the settings of the Postmark Approved Wordpress plugin
+ */
 function pma_admin_import_settings(){
 	pma_import_settings();
 	echo "Settings Imported";
