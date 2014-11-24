@@ -296,25 +296,45 @@ function pma_parse_headers($headers) {
     }
     $recognized_headers = array();
     $headers_list = array(
-        'Content-Type',
-        'Bcc',
-        'Cc',
-        'Reply-To'
+        'Content-Type' => array(),
+        'Bcc' => array(),
+        'Cc' => array(),
+        'Reply-To' => array()
     );
     if (!empty($headers)) {
-        foreach ($headers as $key => $header) {
-            //@todo there are three kind of people, one who send headers as 
-            //string, second who send headers as associative array, third who 
-            //send headers as simple text array
-            $header = explode(':', $header);
-            foreach ($headers_list as $header_name) {
-                if (stripos($header[0], $header_name) !== false) {
-                    $recognized_headers[$header_name] = trim($header[1]);
-                    unset($headers[$key]);
-                    break;
-                }
-            }
-        }
+	    foreach ($headers as $key => $header) {
+		    if (array_key_exists($key, $headers_list)) {
+			    $header_key = $key;
+			    $header_val = $header;
+		    }
+		    else {
+			    $segments = explode(':', $header);
+			    if (count($segments) === 2) {
+				    if (array_key_exists($segments[0], $headers_list)) {
+					    list($header_key, $header_val) = $segments;
+				    }
+			    }
+		    }
+		    if (isset($header_key) && isset($header_val)) {
+			    if (stripos($header_val, ',') === false) {
+				    $headers_list[$header_key][] = trim($header_val);
+			    }
+			    else {
+				    $vals = explode(',', $header_val);
+				    foreach ($vals as $val) {
+					    $headers_list[$header_key][] = trim($val);
+				    }
+			    }
+			    unset($header_key);
+			    unset($header_val);
+		    }
+	    }
+	    
+	    foreach ($headers_list as $key => $value) {
+		    if (count($value) > 0) {
+			    $recognized_headers[$key] = implode(', ', $value);
+		    }
+	    }
     }
     return $recognized_headers;
 }
