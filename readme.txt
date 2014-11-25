@@ -1,9 +1,8 @@
 === PostmarkApp Email Integrator ===
-Contributors: gagan0123, guillaumemolter
+Contributors: gagan0123, guillaumemolter, livearoha
 Tags: postmark, email, smtp, notifications, wp_mail, wildbit
 Requires at least: 3.5
-Tested up to: 4.0
-Donate link: https://gagan.pro/donate/?plugin=Postmarkapp
+Tested up to: 4.0.1
 Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +17,7 @@ If you don't already have a free Postmark account, you can get one in minutes. E
 
 PLEASE NOTE: This is not official PostMarkApp Plugin. This plugin is a copy of the Official Postmarkapp plugin which had several critical bugs.  The Official Plugin developers have not addressed these bugs for some time now, so I created a new plugin to solve those issues.
 
-Issues fixed:
+Issues fixed(from the official version):
 
  * Fixed the Connection Timeout bug
  * Fixed the Fatal Error due to incorrect usage of WP_Error object
