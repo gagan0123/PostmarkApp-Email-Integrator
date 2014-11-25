@@ -301,36 +301,47 @@ function pma_parse_headers($headers) {
         'Cc' => array(),
         'Reply-To' => array()
     );
+    $headers_list_lowercase = array_change_key_case($headers_list, CASE_LOWER);
     if (!empty($headers)) {
 	    foreach ($headers as $key => $header) {
-		    if (array_key_exists($key, $headers_list)) {
+                    $key = strtolower($key);
+		    if (array_key_exists($key, $headers_list_lowercase)) {
 			    $header_key = $key;
-			    $header_val = $header;
+                            $header_val = $header;
+                            $segments = explode(':', $header);
+                            if (count($segments) === 2) {
+				    if (array_key_exists(strtolower($segments[0]), $headers_list_lowercase)) {
+					    list($header_key, $header_val) = $segments;
+                                            $header_key = strtolower($header_key);
+				    }
+			    }
 		    }
 		    else {
 			    $segments = explode(':', $header);
 			    if (count($segments) === 2) {
-				    if (array_key_exists($segments[0], $headers_list)) {
+				    if (array_key_exists(strtolower($segments[0]), $headers_list_lowercase)) {
 					    list($header_key, $header_val) = $segments;
+                                            $header_key = strtolower($header_key);
 				    }
 			    }
 		    }
 		    if (isset($header_key) && isset($header_val)) {
 			    if (stripos($header_val, ',') === false) {
-				    $headers_list[$header_key][] = trim($header_val);
+				    $headers_list_lowercase[$header_key][] = trim($header_val);
 			    }
 			    else {
 				    $vals = explode(',', $header_val);
 				    foreach ($vals as $val) {
-					    $headers_list[$header_key][] = trim($val);
+					    $headers_list_lowercase[$header_key][] = trim($val);
 				    }
 			    }
 			    unset($header_key);
 			    unset($header_val);
 		    }
 	    }
-	    
+
 	    foreach ($headers_list as $key => $value) {
+                    $value = $headers_list_lowercase[strtolower($key)];
 		    if (count($value) > 0) {
 			    $recognized_headers[$key] = implode(', ', $value);
 		    }
