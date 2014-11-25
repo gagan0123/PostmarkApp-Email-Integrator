@@ -1,6 +1,6 @@
 # PostmarkApp Email Integrator #
 
-* **Contributors:** [gagan0123] (http://profiles.wordpress.org/gagan0123), [guillaumemolter] (http://profiles.wordpress.org/guillaumemolter),
+* **Contributors:** [gagan0123] (http://profiles.wordpress.org/gagan0123), [guillaumemolter] (http://profiles.wordpress.org/guillaumemolter), [livearoha] (http://profiles.wordpress.org/livearoha),
 
 * **License:** [GPL v2 or later] ( http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -14,7 +14,7 @@ If you don't already have a free Postmark account, you can get one in minutes. E
 
 PLEASE NOTE: This is not official PostMarkApp Plugin. This plugin is a copy of the Official Postmarkapp plugin which had several critical bugs.  The Official Plugin developers have not addressed these bugs for some time now, so I created a new plugin to solve those issues.
 
-Issues fixed:
+Issues fixed(from the official version):
 
  * Fixed the Connection Timeout bug
  * Fixed the Fatal Error due to incorrect usage of WP_Error object
@@ -65,6 +65,11 @@ Sign up for your free Postmark account at http://postmarkapp.com and get started
 
 
 ## Changelog ##
+
+#### v2.3 ####
+
+* Allow multiple Bcc & Cc in headers that are not comma separated.
+* Fixed casing issues in the headers caused when some plugin/code uses lower casing for headers.
 
 #### v2.2 ####
 
