@@ -70,6 +70,11 @@ Sign up for your free Postmark account at http://postmarkapp.com and get started
 
 == Changelog ==
 
+= v2.3 =
+
+* Allow multiple Bcc & Cc in headers that are not comma separated.
+* Fixed casing issues in the headers caused when some plugin/code uses lower casing for headers.
+
 = v2.2 =
 
 * Added better $var validation using isset to prevent 'Notice: Undefined' when WP_debug is activated.
