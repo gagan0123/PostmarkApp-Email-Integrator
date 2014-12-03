@@ -215,6 +215,10 @@ if (get_option('postmarkapp_enabled') == 1) {
             extract(apply_filters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments')));
 
             $recognized_headers = pma_parse_headers($headers);
+            
+            //Adding the filter thats executed in the wp_mail function so that plugins using those filters will not clash
+            //Did not used the filters wp_mail_from_name, wp_mail_from(both are defined in the postmarkapp settings) and wp_mail_charset(postmarkapp does not accept charset)
+            $recognized_headers['Content-Type'] = apply_filters( 'wp_mail_content_type', $recognized_headers['Content-Type'] );
 
             if (isset($recognized_headers['Content-Type']) && stripos($recognized_headers['Content-Type'], 'text/html') !== false) {
                 $current_email_type = 'HTML';
