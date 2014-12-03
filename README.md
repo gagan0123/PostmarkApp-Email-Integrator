@@ -66,6 +66,10 @@ Sign up for your free Postmark account at http://postmarkapp.com and get started
 
 ## Changelog ##
 
+#### v2.4 ####
+
+ * Added filter as defined in the wp_mail function so as to minimize conflict with other plugins.
+
 #### v2.3 ####
 
 * Allow multiple Bcc & Cc in headers that are not comma separated.
